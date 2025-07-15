@@ -80,7 +80,7 @@ ENSIL-ENSCI
 - `styles.py`:  Applies light/dark theme recursively to all GUI widgets
 
 ## Directory structure:
-
+```text
 interface_project\
 |
 |---main.py
@@ -100,6 +100,5 @@ interface_project\
 |   |---vision_utils.py
 |---resources\
 |   |---icons\
-
-<pre> ```text interface_project/ │ ├── main.py ├── README.txt ├── gui/ │ ├── __init__.py │ ├── main_window.py │ ├── camera_window.py │ └── styles/ ├── communication/ │ ├── __init__.py │ ├── flask_server.py │ └── serial_comm.py ├── logic/ ├── __init__.py └── trajectory_handler.py ``` </pre>
+```
 
