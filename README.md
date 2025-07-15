@@ -101,5 +101,5 @@ interface_project\
 |---resources\
 |   |---icons\
 
-
+<pre> ```text interface_project/ │ ├── main.py ├── README.txt ├── gui/ │ ├── __init__.py │ ├── main_window.py │ ├── camera_window.py │ └── styles/ ├── communication/ │ ├── __init__.py │ ├── flask_server.py │ └── serial_comm.py ├── logic/ ├── __init__.py └── trajectory_handler.py ``` </pre>
 
