@@ -1,4 +1,4 @@
-README File — General — Version: 0.1 (2025-07-07)
+README File — General — Version: 0.2 (2025-15-07)
 
 This README file was generated on 2025-07-07 by Baptiste Poncet.
 
