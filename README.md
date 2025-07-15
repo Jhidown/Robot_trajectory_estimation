@@ -81,10 +81,10 @@ ENSIL-ENSCI
 
 ## Directory structure:
 ```text
+README.md
 interface_project\
 |
 |---main.py
-|---README.txt
 |---gui\
 |   |---__init__.py
 |   |---main_window.py
