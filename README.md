@@ -1,4 +1,4 @@
-README File — General — Version: 0.2 (2025-15-07)
+README File — General — Version: 0.3 (2025-17-07)
 
 This README file was generated on 2025-07-07 by Baptiste Poncet.
 
@@ -38,6 +38,39 @@ ENSIL-ENSCI
   - For the **right motor**, the direction is inverted: positive values move it **backward**, and negative values move it **forward**.
 - These commands are logged in real time with timestamps and displayed in the command history window.
 
+# INSTALLATION AND LAUNCH
+## Prerequisites:
+
+- Python 3.10.10
+- Windows 11 (tested)
+- Visual Studio Code (recommended)
+- Available COM port for LoRa module
+- Intel monocular USB webcam
+
+## Installing dependencies:
+```pip install flask numpy matplotlib Pillow pyserial```
+
+## Setup
+- Connect the LoRa module to a COM port
+- Connect the USB webcam
+- Check the COM port in system settings
+
+## Launch
+```python main.py```
+
+## Usage
+- The GUI interface opens automatically
+- Flask server starts in the background
+- Check serial connection via status indicators
+- Send commands in the format: ```SPEED <L> <R>```
+
+## Troubleshooting:
+
+- If COM port connection fails, verify the port number and ensure the LoRa module is properly connected
+- If camera is not detected, check USB connection and ensure no other applications are using the webcam
+- For Flask server issues, ensure the port is not already in use by another application
+
+# DATA AND FILE OVERVIEW
 ## Data processing methods:
 
 - Theorical trajectories are calculated and updated on each command, and exported via `trajectory.py` as `.csv`
