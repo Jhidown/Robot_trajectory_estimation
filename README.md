@@ -1,8 +1,8 @@
-README File — General — Version: 0.3 (2025-17-07)
+README File — General — Version: 0.4 (2025-24-07)
 
 This README file was generated on 2025-07-07 by Baptiste Poncet.
 
-Last updated on: 2025-07-07
+Last updated on: 2025-24-07
 
 # GENERAL INFORMATION
 
@@ -74,7 +74,7 @@ ENSIL-ENSCI
 ## Data processing methods:
 
 - Theorical trajectories are calculated and updated on each command, and exported via `trajectory.py` as `.csv`
-- The camera's trajectory is estimated from images taken every 8 seconds (which corresponds to 30 cm at the robot's speed).
+- The camera's trajectory is estimated from images taken when a message such as ‘Encode angle ID: number’ is received, or every 9 seconds.
 - Visual Odometry is processed live using grayscale frame extraction, frame-to-frame pose estimation, and trajectory plotting
 - Flask runs as a background thread to receive external commands securely (via token)
 - The dark mode feature dynamically restyles all GUI components recursively
