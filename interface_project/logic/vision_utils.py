@@ -36,21 +36,31 @@ class VisualOdometry:
         self.sift = cv2.SIFT_create()
         self.bf = cv2.BFMatcher(cv2.NORM_L2)
 
+        self.capture_requested = False
+
     def release(self):
         self.cap.release()
 
     def read_frame(self):
         now = time.time()
-        if now - self.last_capture_time < 8.0:  # Capture every 8 seconds
-            return None
-
-        ret, frame = self.cap.read()
-        if not ret:
-            return None
-        self.last_capture_time = now  # Updates the last capture time
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        return gray, rgb
+        if now - self.last_capture_time >= 9.0:  # Trigger capture even without instruction after 9 seconds
+            ret, frame = self.cap.read()
+            if not ret:
+                return None
+            self.last_capture_time = now  # Updates the last capture time
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            return gray, rgb
+        if self.capture_requested:
+            self.capture_requested = False
+            self.last_trigger_time = now
+            ret, frame = self.cap.read()
+            if not ret:
+                return None
+            self.last_capture_time = now  # Updates the last capture time
+            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            return gray, rgb
 
     def update_pose(self, gray_frame):
         kp, des = self.sift.detectAndCompute(gray_frame, None)
@@ -126,3 +136,7 @@ class VisualOdometry:
             np.savetxt(filepath, self.get_trajectory(), delimiter=",", header="x,y", comments="")
             return True
         return False
+    
+    def trigger_capture(self):
+        self.capture_requested = True
+        self.last_capture_time = time.time()

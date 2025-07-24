@@ -14,14 +14,16 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), r'C:\Use
 from .camera_window import open_camera_window
 from .styles import toggle_dark_mode
 from communication.serial_comm import start_connection, send_custom_message, close_connection
-from logic.trajectory import update_trajectory,reset_trajectory,export_trajectory_to_csv
+from logic.trajectory import update_trajectory
 from communication.flask_server import start_flask_server, register_command_handler, register_log_handler
+from logic.vision_utils import VisualOdometry
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
 import serial
 import serial.tools.list_ports
 from datetime import datetime
+import re
 """
     
     Code general structure : 
@@ -84,20 +86,31 @@ def run_gui():
         root.grid_columnconfigure(i, weight=1, uniform="equal")
 
     dark_mode = False
+    vo = VisualOdometry()
+
+    def insert_custom_message(message: str, tag: str):
+
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        full_msg = f"[{timestamp}] {message}"
+        text_history.insert(tk.END,full_msg+"\n",tag)
+        text_history.see(tk.END)
+
+        match = re.search(r"angle:\s*(\d+)", message)
+        if match :
+            vo.trigger_capture()
+
+
 
     def connect_serial():
         port = port_var.get()
         baud = int(baud_var.get())
 
         def log_to_history(msg):
-            text_history.insert(tk.END, msg + "\n", "received")
-            text_history.see(tk.END)
+            insert_custom_message(msg,"received")
 
         success = start_connection(port, baud, log_to_history, update_status)
         if success:
-            timestamp = datetime.now().strftime("%H:%M:%S")
-            text_history.insert(tk.END, f"[{timestamp}] [PC] Connection established with {port}.\n", "sent")
-            text_history.see(tk.END)
+            insert_custom_message(f"[PC] Connection established with {port}","sent")
 
     def reset_history():
         close_connection()
@@ -130,10 +143,8 @@ def run_gui():
 
         send_custom_message(message, update_status)
         update_trajectory(left, right)
-
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        text_history.insert(tk.END, f"[{timestamp}][PC ➜ LoRa] {message}\n", "sent")
-        text_history.see(tk.END)
+        insert_custom_message(f"[PC ➜ LoRa] {message}","sent")
+        
 
     def forward():
         try:
@@ -199,8 +210,7 @@ def run_gui():
         """
         Displays a Flask log in the history.
         """
-        text_history.insert(tk.END, message + "\n", "received")
-        text_history.see(tk.END)
+        insert_custom_message(message,"received")
 
     register_command_handler(handle_flask_command)
     register_log_handler(handle_flask_log)
@@ -211,9 +221,7 @@ def run_gui():
 
 
     def write_history_custom_message(message : str):
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        text_history.insert(tk.END, f"[{timestamp}][PC ➜ LoRa] {message}\n", "sent")
-        text_history.see(tk.END)
+        insert_custom_message(f"[PC ➜ LoRa] {message}","sent")
         send_custom_message(message,update_status)
         send_entry.delete(0,tk.END)
 
