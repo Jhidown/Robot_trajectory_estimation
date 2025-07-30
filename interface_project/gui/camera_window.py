@@ -15,7 +15,7 @@ import numpy as np
 
 
 
-def open_camera_window(root):
+def open_camera_window(root,vo,ekf):
     running = True
 
     camera_window = tk.Toplevel(root)
@@ -48,6 +48,7 @@ def open_camera_window(root):
     ax.grid(True)
     ax.axis("equal")
     trajectory_line, = ax.plot([], [], 'g-')
+    ekf_line, = ax.plot([], [], 'r-')
 
     canvas = FigureCanvasTkAgg(fig, master=plot_frame)
     canvas.draw()
@@ -60,6 +61,9 @@ def open_camera_window(root):
     # ===== Actions =====
     def camera_save_data():
         vo.save_trajectory_to_csv()
+
+    def save_ekf_csv():
+        ekf.save_trajectory_to_csv()
 
     def camera_save_plot():
         file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")])
@@ -98,7 +102,18 @@ def open_camera_window(root):
             y_shifted = trajectory[:, 1]
             trajectory_line.set_data(x_shifted, y_shifted)
 
-            max_range = max(np.max(np.abs(x_shifted)), np.max(np.abs(y_shifted))) + 0.5
+            ekf_traj = np.array(ekf.trajectory)
+            if len(ekf_traj) > 1:
+                x_ekf = ekf_traj[:, 0]
+                y_ekf = ekf_traj[:, 1]
+                ekf_line.set_data(x_ekf, y_ekf)
+
+            max_range = max(
+            np.max(np.abs(x_shifted)) if len(x_shifted) else 0,
+            np.max(np.abs(y_shifted)) if len(y_shifted) else 0,
+            np.max(np.abs(x_ekf)) if len(ekf_traj) else 0,
+            np.max(np.abs(y_ekf)) if len(ekf_traj) else 0) + 0.5
+
             ax.set_xlim(-max_range, max_range)
             ax.set_ylim(-max_range, max_range)
             canvas.draw()
@@ -116,7 +131,8 @@ def open_camera_window(root):
     # ===== Buttons =====
     tk.Button(camera_button_frame, text="Save Data", width=15, command=camera_save_data).grid(row=0, column=0, padx=10, pady=10)
     tk.Button(camera_button_frame, text="Save Plot", width=15, command=camera_save_plot).grid(row=0, column=1, padx=10, pady=10)
-    tk.Button(camera_button_frame, text="Reset Trajectory", width=15, command=reset_trajectory_camera).grid(row=0, column=2, padx=10, pady=10)
+    tk.Button(camera_button_frame, text="Reset Trajectory", width=15, command=reset_trajectory_camera).grid(row=0, column=3, padx=10, pady=10)
     tk.Button(camera_button_frame, text="Stop Camera", width=15, fg="red", command=camera_stop).grid(row=0, column=3, padx=10, pady=10)
+    tk.Button(camera_button_frame,text='Save EKF',width=15,command=save_ekf_csv).grid(row=0, column=2, padx=10, pady=10)
 
     update_loop()

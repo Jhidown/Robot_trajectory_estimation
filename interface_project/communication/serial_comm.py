@@ -48,7 +48,7 @@ def _read_from_port(on_message_callback):
                 line = _serial_obj.readline().decode('utf-8').strip()
                 if line:
                     timestamp = datetime.now().strftime("%H:%M:%S")
-                    on_message_callback(f"[{timestamp}][LoRa ➜ PC] {line}")
+                    on_message_callback(f"[LoRa ➜ PC] {line}")
             except Exception as e:
                 on_message_callback(f"[{datetime.now().strftime('%H:%M:%S')}][ERROR] {e}")
                 break

@@ -17,6 +17,7 @@ from communication.serial_comm import start_connection, send_custom_message, clo
 from logic.trajectory import update_trajectory
 from communication.flask_server import start_flask_server, register_command_handler, register_log_handler
 from logic.vision_utils import VisualOdometry
+from logic.ekf_filter import EKFFusion
 import tkinter as tk
 from tkinter import ttk
 from tkinter import filedialog
@@ -24,9 +25,10 @@ import serial
 import serial.tools.list_ports
 from datetime import datetime
 import re
+import time
 """
     
-    Code general structure : 
+    Widget structure : 
     root
     |
     |---port_frame
@@ -87,17 +89,52 @@ def run_gui():
 
     dark_mode = False
     vo = VisualOdometry()
+    ekf = EKFFusion()
+    delta_d_total = 0.0
+    delta_theta_total = 0.0
+    dt_accumulated = 0.0
+    last_update_time = [time.time()]
 
     def insert_custom_message(message: str, tag: str):
+        nonlocal delta_d_total, delta_theta_total, dt_accumulated
 
         timestamp = datetime.now().strftime("%H:%M:%S")
         full_msg = f"[{timestamp}] {message}"
         text_history.insert(tk.END,full_msg+"\n",tag)
         text_history.see(tk.END)
 
-        match = re.search(r"angle:\s*(\d+)", message)
-        if match :
+        match_efk = re.search(r"EKF\s+([-\d.]+)\s+([-\d.]+)",message)
+        if match_efk :
+            delta_d = float(match_efk.group(1))
+            delta_theta = float(match_efk.group(2))
+            
+            current_time = time.time()
+            dt = current_time - last_update_time[0]
+            last_update_time[0] = current_time
+
+            delta_d_total += delta_d
+            delta_theta_total += delta_theta
+            dt_accumulated += dt
+
+
+        match_vo = re.search(r"[DIST]", message)
+        if match_vo :
             vo.trigger_capture()
+            x_cam, y_cam = vo.get_position()
+            
+            if dt_accumulated > 0:
+                ekf.predict(delta_d_total, delta_theta_total, dt_accumulated)
+                delta_d_total = 0
+                delta_theta_total = 0
+                dt_accumulated = 0
+
+            if x_cam is not None and y_cam is not None:
+                ekf.update(x_cam, y_cam)
+        
+        
+
+            
+
 
 
 
@@ -225,7 +262,6 @@ def run_gui():
         send_custom_message(message,update_status)
         send_entry.delete(0,tk.END)
 
-
     # ===== Setting up frames =====
     port_frame = tk.Frame(root)
     port_frame.grid(row=0, column=0, columnspan=3, sticky="nsew",padx = 10, pady= 5)
@@ -311,7 +347,7 @@ def run_gui():
     dark_button = tk.Button(top_right_button_frame, text="Night mode",width=15, command=toggle_theme)
     dark_button.grid(row=0, column=0, padx=5, pady=5)
 
-    open_camera_button = tk.Button(top_right_button_frame,text='Open camera',width=15,command=lambda: open_camera_window(root))
+    open_camera_button = tk.Button(top_right_button_frame,text='Open camera',width=15,command=lambda: open_camera_window(root,vo,ekf))
     open_camera_button.grid(row=0,column=1,padx=5,pady=5)
 
     send_entry = tk.Entry(send_frame, width=50)

@@ -7,7 +7,6 @@
 
 
 from flask import Flask, request, jsonify
-from datetime import datetime
 import threading
 
 # ===== Flask setup =====
@@ -50,10 +49,8 @@ def receive_command():
         return jsonify({"error": "Missing command or commands"}), 400
 
     for command in commands:
-        timestamp = datetime.now().strftime("%H:%M:%S")
-
         if _log_callback:
-            _log_callback(f"[{timestamp}][📱 ➜ PC] {command}")
+            _log_callback(f"[📱 ➜ PC] {command}")
 
         if _command_callback:
             handled = _command_callback(command)

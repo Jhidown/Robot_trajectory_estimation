@@ -12,7 +12,7 @@ import time
 from tkinter import filedialog
 
 # ===== Camera Parameters =====
-CAMERA_INDEX = 0     # 0 for default camera, 1 for USB camera
+CAMERA_INDEX = 1      # 0 for default camera, 1 for USB camera
 FOCAL_MATRIX = np.array([[825.7095, 0, 416.1148],
                          [0, 837.0046, 490.3529],
                          [0, 0, 1]])
@@ -21,7 +21,7 @@ CAPTURE_INTERVAL = 0.30 / 0.035
 
 class VisualOdometry:
     def __init__(self, camera_index=CAMERA_INDEX, focal_matrix=FOCAL_MATRIX, scale=DEFAULT_SCALE):
-        self.cap = cv2.VideoCapture(camera_index)
+        self.cap = cv2.VideoCapture(camera_index, cv2.CAP_DSHOW)
         self.focal_matrix = focal_matrix
         self.scale = scale
         self.pose = np.eye(4)
@@ -43,7 +43,7 @@ class VisualOdometry:
 
     def read_frame(self):
         now = time.time()
-        if now - self.last_capture_time >= 9.0:  # Trigger capture even without instruction after 9 seconds
+        if now - self.last_capture_time >= 10.0:  # Trigger capture even without instruction after 10 seconds
             ret, frame = self.cap.read()
             if not ret:
                 return None
@@ -101,7 +101,7 @@ class VisualOdometry:
         self.pose = self.pose @ T
 
         trans = self.pose[:3, 3]
-        point = trans[[0, 2]]
+        point = np.array([-trans[2], -trans[0]])
 
         if self.origin_point is None:
             self.origin_point = point
@@ -140,3 +140,15 @@ class VisualOdometry:
     def trigger_capture(self):
         self.capture_requested = True
         self.last_capture_time = time.time()
+
+    def get_position(self):
+        result = self.read_frame()
+        if result is None:
+            return None, None
+
+        gray, _ = result
+        position = self.update_pose(gray)
+        if position is not None:
+            return position[0], position[1]  # x, y
+        else:
+            return None, None

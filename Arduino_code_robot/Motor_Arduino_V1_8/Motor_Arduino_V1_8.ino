@@ -73,6 +73,7 @@ void setup() {
   first = true;
   angle_tot = 0;
   T_init = millis();
+
 }
 // ====================== SETUP END =========================
 
@@ -223,8 +224,6 @@ void readEncoders_30cm() {
 
         enc.total_position += delta;
         enc.last_position = pos;
-
-
         if (enc.total_position > 1565) {
           Serial.print("Encoder 0x");
           Serial.print(enc.can_id, HEX);
