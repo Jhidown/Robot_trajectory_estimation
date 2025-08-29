@@ -250,6 +250,24 @@ Python dependencies (ROS2 node development):
 
 ### Description of each ROS2 node
 
+  
+
+#### CAN Bridge Node (`can_bridge`)
+
+- **Role**: Provides a bidirectional bridge between ROS2 topics and the CAN bus through a USB-to-CAN serial adapter.  
+- **Inputs**:  
+  - Topic: `/can_tx` (`can_msgs/Frame`)  
+  - Receives CAN frames from other ROS2 nodes (e.g., `motor_controller`) and forwards them to the CAN bus over the serial port.  
+- **Outputs**:  
+  - Topic: `/can_rx` (`can_msgs/Frame`)  
+  - Publishes all CAN frames received from the serial interface to ROS2, making them available to other nodes.  
+- **Implementation details**:  
+  - Uses a USB serial connection (`/dev/ttyUSB0`, 115200 baud).  
+  - Frames are wrapped/unwrapped with a custom protocol (`0xAA … 0x55` markers).  
+  - Performs motor initialization on startup by sending a sequence of CANOpen commands (NMT + mode configuration).  
+  - Periodically reads from the serial port and publishes decoded CAN frames.  
+  - Logs all transmitted (`[TX]`) and received (`[RX]`) frames for debugging.  
+
 #### Motor Node (`motor_controller`)
 
 - **Role**: Acts as a bridge between high-level velocity commands and low-level CANOpen motor messages.  
@@ -269,66 +287,91 @@ Python dependencies (ROS2 node development):
   - Parses and validates string commands.  
   - Converts target speeds into CANOpen SDO frames (`0x60FF:00` index).  
   - Publishes CAN frames with the correct DLC (8 bytes).  
-  - Logs each transmitted command using ROS2 logger.  
+  - Logs each transmitted command using ROS2 logger.
+  
+#### Odometry Node (`odom_node`)
 
-#### CAN Bridge Node (`can_bridge`)
-
-- **Role**: Provides a bidirectional bridge between ROS2 topics and the CAN bus through a USB-to-CAN serial adapter.  
+- **Role**: Computes the robot’s odometry (position and orientation) from CAN wheel encoder data and publishes it as `Odometry` and `Path`.  
 - **Inputs**:  
-  - Topic: `/can_tx` (`can_msgs/Frame`)  
-  - Receives CAN frames from other ROS2 nodes (e.g., `motor_controller`) and forwards them to the CAN bus over the serial port.  
-- **Outputs**:  
   - Topic: `/can_rx` (`can_msgs/Frame`)  
-  - Publishes all CAN frames received from the serial interface to ROS2, making them available to other nodes.  
+    - CAN frames with wheel encoder data:  
+      - `0x381` → right wheel  
+      - `0x382` → left wheel  
+- **Outputs**:  
+  - Topic: `/odom` (`nav_msgs/Odometry`)  
+    - Odometry estimation with position, orientation, linear and angular velocity.  
+  - Topic: `/odom_path` (`nav_msgs/Path`)  
+    - Accumulated trajectory for visualization (frame `"map"`).  
 - **Implementation details**:  
-  - Uses a USB serial connection (`/dev/ttyUSB0`, 115200 baud).  
-  - Frames are wrapped/unwrapped with a custom protocol (`0xAA … 0x55` markers).  
-  - Performs motor initialization on startup by sending a sequence of CANOpen commands (NMT + mode configuration).  
-  - Periodically reads from the serial port and publishes decoded CAN frames.  
-  - Logs all transmitted (`[TX]`) and received (`[RX]`) frames for debugging.  
+  - Decodes wheel encoder positions and speeds from CAN frames.  
+  - Converts wheel data into linear displacement `Δd` and angular rotation `Δθ`.  
+  - Updates robot pose `(x, y, θ)` using differential drive kinematics.  
+  - Computes and publishes linear (`v`) and angular (`w`) velocities.  
+  - Odometry is published either:  
+    - when the robot has traveled more than **0.3 m**, or  
+    - after a timeout of **9 s** (whichever comes first).  
+  - Publishes covariance matrices for both pose and twist.  
+  - Also maintains a `Path` message for easy visualization in RViz.
 
 
+#### Camera Node (`camera_node`)
 
-#### Extended Kalman Filter (Sensor Fusion)
+- **Role**: Captures images from a USB camera and publishes them as ROS2 image messages, synchronized with odometry updates. 
+- **Inputs**:  
+  - Topic: `/odom` (`nav_msgs/Odometry`)  
+  - Each received odometry message triggers a new camera capture.  
+- **Outputs**:  
+  - Topic: `/camera/image_raw` (`sensor_msgs/Image`)  
+  - Publishes frames from the camera in `bgr8` encoding.  
+- **Implementation details**:  
+  - Uses OpenCV (`cv2.VideoCapture(0)`) to access the default camera.  
+  - Uses `cv_bridge` to convert OpenCV frames to ROS2 `Image` messages.  
+  - Camera frames are only published when odometry updates arrive, ensuring synchronization.  
+  - Properly releases the camera on shutdown.  
 
-- Implemented using the `filterpy` library, especially `filterpy.kalman`
-- Input :
-  - Odometry from encoders (wheel movement) every
-  - Visual position estimates (when VO update)
-- Output:
-  - Fused position estimate (x, y)
-  - Displayed in red on the trajectory plot
-- Updates triggered by:
-  - Distance messages `[DIST]`
-  - Periodic updates (every 9 seconds)
 
-#### Motor Control and CANOpen Protocol
-- Serial commands `SPEED <L> <R>` are parsed by the Arduino and translated into CANopen messages
-- Direction handling :
-  - Left motor: Positive = forward / Negative = backward
-  - Right motor: Positive = backward / Negative = forward
-- CAN communication :
-  - Uses MCP2515 CAN controller
-- Encoders send position data via CAN :
-  - Using TPDO (Transmit Process Data Object)
-  - Data format: `EKF <delta_d> <delta_theta>`
-   - `<delta_d>` is the distance travelled since the last transmission in meter. Distance calculated using the formula :   
-      `(accumulated_delta_L + accumulated_delta_R) / 2.0`
-   - `<delta_theta>` is the angle travelled since the last transmission in radians. Angle calculated using the formula :   
-      `(accumulated_delta_R - accumulated_delta_L) / WHEEL_BASE` where WHEEL_BASE = 30cm
+#### Visual Odometry Node (`vo_node`)
  
-#### Graphical User Interface (GUI) and Command Handling
-- GUI built with `tkinter`
-- Flask API allows external control (e.g., via smartphone + HTTP Shortcuts)
-- Flask server runs in the background on the PC
-- Commands visible in log:
-  - Initialization of Arduino Board
-  - Error
-  - `EKF <delta_d> <delta_theta>`
-  - `[DIST]`
-  - `SPEED <L> <R>`
-  - Confirmation of Speed from Arduino
-  - communication via Flask
+- **Role**: Estimates the robot’s trajectory from a monocular USB camera using feature-based visual odometry.  
+- **Inputs**:  
+  - Topic: `/camera/image_raw` (`sensor_msgs/Image`)  
+    - Frames captured by the camera.  
+- **Outputs**:  
+  - Topic: `/vo/position` (`geometry_msgs/Point`)  
+    - Current 2D estimated position.  
+  - Topic: `/vo/odom` (`nav_msgs/Odometry`)  
+    - Odometry estimate, formatted for sensor fusion (e.g., EKF).  
+    - Orientation is not estimated (2D VO only, quaternion set to identity).  
+  - Topic: `/vo/path` (`nav_msgs/Path`)  
+    - Accumulated trajectory for visualization in RViz.  
+- **Implementation details**:  
+  - Uses **ORB feature detection** + **BFMatcher** to track features between frames.  
+  - Computes the **Essential matrix** (`cv2.findEssentialMat`) and recovers relative pose with `cv2.recoverPose`.  
+  - Maintains a cumulative pose estimate (homogeneous 4×4 transform).  
+  - Applies a scaling factor (`DEFAULT_SCALE = 0.3`) to stabilize translation estimates.  
+  - Publishes simplified `Point`, `Odometry`, and `Path` messages.  
+  - Maintains trajectory history for debugging and visualization.  
+
+ #### Lidar Reader Node (`lidar_reader`)
+
+- **Role**: Reads LiDAR scans and detects obstacles within a narrow forward-facing field of view (−20° to +20°).  
+- **Inputs**:  
+  - Topic: `/scan` (`sensor_msgs/LaserScan`)  
+    - Standard 2D LiDAR scan data.  
+- **Outputs**:  
+  - No published topic (logging only).  
+  - Outputs log messages indicating the minimum detected distance to an obstacle in the defined field of view.  
+- **Implementation details**:  
+  - Converts angles to indices in the LiDAR `ranges` array.  
+  - Extracts scan data between **−20° and +20°** relative to the robot’s forward axis.  
+  - Filters out invalid (`inf`) values.  
+  - Logs either:  
+    - *“Obstacle between -20° and 20° at X.XX m”* if an obstacle is detected, or  
+    - *“No obstacle between -20° and 20°”* if the field of view is clear.  
+  - Useful for simple **collision avoidance checks** or debugging LiDAR data.  
+
+
+
  
 ## INSTALLATION AND LAUNCH
 ### Software Prerequisites
