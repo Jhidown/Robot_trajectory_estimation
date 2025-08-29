@@ -1,0 +1,19 @@
+running develop
+running egg_info
+writing lidar_reader.egg-info/PKG-INFO
+writing dependency_links to lidar_reader.egg-info/dependency_links.txt
+writing entry points to lidar_reader.egg-info/entry_points.txt
+writing requirements to lidar_reader.egg-info/requires.txt
+writing top-level names to lidar_reader.egg-info/top_level.txt
+reading manifest file 'lidar_reader.egg-info/SOURCES.txt'
+writing manifest file 'lidar_reader.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/site.py
+Creating /home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/lidar-reader.egg-link (link to .)
+Installing filtered_lidar script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+Installing lidar_node script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+
+Installed /home/project/ros2_ws/build/lidar_reader
+running symlink_data
+symbolically linking /home/project/ros2_ws/build/lidar_reader/resource/lidar_reader -> /home/project/ros2_ws/install/lidar_reader/share/ament_index/resource_index/packages
+symbolically linking /home/project/ros2_ws/build/lidar_reader/package.xml -> /home/project/ros2_ws/install/lidar_reader/share/lidar_reader

@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: odom-node
+Version: 0.0.1
+Summary: Node to compute odometry from CAN messages
+Home-page: UNKNOWN
+Maintainer: project
+Maintainer-email: baptistepnct@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN

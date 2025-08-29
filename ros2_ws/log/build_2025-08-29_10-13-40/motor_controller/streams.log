@@ -1,0 +1,17 @@
+[3.563s] Invoking command in '/home/project/ros2_ws/build/motor_controller': PYTHONPATH=/home/project/ros2_ws/build/motor_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/motor_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/motor_controller/build --no-deps symlink_data
+[4.232s] running develop
+[4.766s] running egg_info
+[4.766s] writing motor_controller.egg-info/PKG-INFO
+[4.767s] writing dependency_links to motor_controller.egg-info/dependency_links.txt
+[4.772s] writing entry points to motor_controller.egg-info/entry_points.txt
+[4.774s] writing requirements to motor_controller.egg-info/requires.txt
+[4.774s] writing top-level names to motor_controller.egg-info/top_level.txt
+[4.880s] reading manifest file 'motor_controller.egg-info/SOURCES.txt'
+[4.888s] writing manifest file 'motor_controller.egg-info/SOURCES.txt'
+[5.010s] running build_ext
+[5.010s] Creating /home/project/ros2_ws/install/motor_controller/lib/python3.8/site-packages/motor-controller.egg-link (link to .)
+[5.013s] Installing motor_node script to /home/project/ros2_ws/install/motor_controller/lib/motor_controller
+[5.014s] 
+[5.014s] Installed /home/project/ros2_ws/build/motor_controller
+[5.014s] running symlink_data
+[5.653s] Invoked command in '/home/project/ros2_ws/build/motor_controller' returned '0': PYTHONPATH=/home/project/ros2_ws/build/motor_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/motor_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/motor_controller/build --no-deps symlink_data

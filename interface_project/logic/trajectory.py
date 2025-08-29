@@ -1,78 +1,109 @@
 # ============================================================
 # Author      : Baptiste Poncet
-# Date        : 07/07/2025
+# Date        : 04/08/2025
 # File        : trajectory.py
-# Description : Path management, updating and CSV export
+# Description : Trajectory estimation, plotting and saving utilities
 # ============================================================
 
 
-import math
-import csv
-from datetime import datetime
+from matplotlib.figure import Figure
+import numpy as np
 
-# ===== Physical parameters ===== 
-L = 0.35  # wheel gauge (m)
-v_lin = 0.035  # linear speed m/s  (SPEED 15000)
-omega_rot = 0.2  # angular speed rad/s  (SPEED 15000)
 
-# ===== Stored trajectory =====
-trajectory_data = [(0.0, 0.0, 0.0)]  # x, y, theta
-_last_command_time = None
+class TrajectoryPlotter:
+    def __init__(self):
+        self.fig = Figure(figsize=(5.5, 5.5))
+        self.ax = self.fig.add_subplot(111)
+        self.ax.set_title("Trajectory")
+        self.ax.set_xlabel("x (m)")
+        self.ax.set_ylabel("y (m)")
+        self.ax.set_xlim(-1, 1)
+        self.ax.set_ylim(-1, 1)
+        self.ax.grid(True)
+        self.ax.axis("equal")
 
-def reset_trajectory():
-    global trajectory_data, _last_command_time
-    trajectory_data = [(0.0, 0.0, 0.0)]
-    _last_command_time = None
+        self.trajectory_line, = self.ax.plot([], [], 'g-', label='VO')
+        self.ekf_line, = self.ax.plot([], [], 'r-', label='EKF')
+        self.encoder_line, = self.ax.plot([], [], 'b--', label="Encoders")
 
-def get_trajectory():
-    return trajectory_data
+        self.ax.legend()
+        self.canvas = self.fig.canvas
 
-def time_delta():
-    global _last_command_time
-    now = datetime.now()
-    if _last_command_time is None:
-        delta_t = 0.0
-    else:
-        delta = now - _last_command_time
-        delta_t = delta.total_seconds()
-    _last_command_time = now
-    return delta_t
+    def update(self, vo_trajectory, ekf_trajectory, encoder_trajectory, mode="VO + EKF + Encoders"):
+        show_vo = "VO" in mode
+        show_ekf = "EKF" in mode
+        show_enc = "Encodeurs" in mode
 
-def update_trajectory(left_speed: int, right_speed: int):
-    global trajectory_data
-    delta_t = time_delta()
-    if delta_t == 0.0:
-        return
-
-    x, y, theta = trajectory_data[-1]
-
-    if left_speed * right_speed > 0:  # Rotation
-        dtheta = omega_rot * delta_t
-        if left_speed < 0:
-            theta += dtheta  # left rotation
+        if show_vo and len(vo_trajectory) > 1:
+            x_vo = vo_trajectory[:, 0]
+            y_vo = vo_trajectory[:, 1]
+            self.trajectory_line.set_data(x_vo, y_vo)
         else:
-            theta -= dtheta  # Right rotation 
-    elif left_speed * right_speed == 0:
-        return
-    else:  # Translation
-        distance = v_lin * delta_t
-        if left_speed > 0:
-            x += distance * math.cos(theta)
-            y += distance * math.sin(theta)
+            self.trajectory_line.set_data([], [])
+
+        if show_ekf and len(ekf_trajectory) > 1:
+            x_ekf = ekf_trajectory[:, 0]
+            y_ekf = ekf_trajectory[:, 1]
+            self.ekf_line.set_data(x_ekf, y_ekf)
         else:
-            x -= distance * math.cos(theta)
-            y -= distance * math.sin(theta)
+            self.ekf_line.set_data([], [])
 
-    trajectory_data.append((x, y, theta))
+        if show_enc and len(encoder_trajectory) > 1:
+            x_enc = [p[0] for p in encoder_trajectory]
+            y_enc = [p[1] for p in encoder_trajectory]
+            self.encoder_line.set_data(x_enc, y_enc)
+        else:
+            self.encoder_line.set_data([], [])
 
-def export_trajectory_to_csv(filepath: str) -> bool:
-    try:
-        with open(filepath, mode='w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerow(["x (m)", "y (m)", "theta (rad)"])
-            for point in trajectory_data:
-                writer.writerow(point)
-        return True
-    except Exception as e:
-        print(f"Export error : {e}")
-        return False
+        
+        all_x, all_y = [], []
+        if show_vo and len(vo_trajectory) > 1:
+            all_x += list(x_vo)
+            all_y += list(y_vo)
+        if show_ekf and len(ekf_trajectory) > 1:
+            all_x += list(x_ekf)
+            all_y += list(y_ekf)
+        if show_enc and len(encoder_trajectory) > 1:
+            all_x += x_enc
+            all_y += y_enc
+
+        if all_x and all_y:
+            max_range = max(np.max(np.abs(all_x)), np.max(np.abs(all_y))) + 0.5
+        else:
+            max_range = 1
+
+        self.ax.set_xlim(-max_range, max_range)
+        self.ax.set_ylim(-max_range, max_range)
+
+        if self.ax.legend_:
+            self.ax.legend_.remove()
+
+        visible_lines = []
+        labels = []
+
+        if show_vo:
+            visible_lines.append(self.trajectory_line)
+            labels.append("VO")
+        if show_ekf:
+            visible_lines.append(self.ekf_line)
+            labels.append("EKF")
+        if show_enc:
+            visible_lines.append(self.encoder_line)
+            labels.append("Encoders")
+
+        if visible_lines:
+            self.ax.legend(visible_lines, labels)
+
+        self.canvas.draw()
+
+
+    def reset(self):
+        self.trajectory_line.set_data([], [])
+        self.ekf_line.set_data([], [])
+        self.encoder_line.set_data([], [])
+        self.ax.set_xlim(-1, 1)
+        self.ax.set_ylim(-1, 1)
+        self.canvas.draw()
+
+    def save(self, filepath):
+        self.fig.savefig(filepath, bbox_inches='tight')

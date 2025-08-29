@@ -1,0 +1,4 @@
+[console_scripts]
+filtered_lidar = lidar_reader.filtered_lidar:main
+lidar_node = lidar_reader.lidar_node:main
+

@@ -1,0 +1,18 @@
+[3.751s] Invoking command in '/home/project/ros2_ws/build/lidar_reader': PYTHONPATH=/home/project/ros2_ws/build/lidar_reader/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/lidar_reader/build --no-deps symlink_data
+[4.546s] running develop
+[5.114s] running egg_info
+[5.116s] writing lidar_reader.egg-info/PKG-INFO
+[5.117s] writing dependency_links to lidar_reader.egg-info/dependency_links.txt
+[5.119s] writing entry points to lidar_reader.egg-info/entry_points.txt
+[5.119s] writing requirements to lidar_reader.egg-info/requires.txt
+[5.120s] writing top-level names to lidar_reader.egg-info/top_level.txt
+[5.200s] reading manifest file 'lidar_reader.egg-info/SOURCES.txt'
+[5.202s] writing manifest file 'lidar_reader.egg-info/SOURCES.txt'
+[5.302s] running build_ext
+[5.304s] Creating /home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/lidar-reader.egg-link (link to .)
+[5.305s] Installing filtered_lidar script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+[5.306s] Installing lidar_node script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+[5.306s] 
+[5.307s] Installed /home/project/ros2_ws/build/lidar_reader
+[5.307s] running symlink_data
+[5.620s] Invoked command in '/home/project/ros2_ws/build/lidar_reader' returned '0': PYTHONPATH=/home/project/ros2_ws/build/lidar_reader/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/lidar_reader/build --no-deps symlink_data

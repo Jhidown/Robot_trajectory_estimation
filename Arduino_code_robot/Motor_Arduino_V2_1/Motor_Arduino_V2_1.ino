@@ -69,7 +69,8 @@ void setup() {
   CAN.init_Mask(1, 0, 0x7FF);
   CAN.init_Filt(0, 0, 0x381);       // Filtre sur 0x381
   CAN.init_Filt(1, 0, 0x382);       // Filtre sur 0x382
-
+  CAN.init_Filt(1, 1, 0x701);  // Heartbeat node 1
+  CAN.init_Filt(1, 2, 0x702);  // Heartbeat node 2
   CAN.setMode(MCP_NORMAL);
 
   //Motor modes to Pre-Operationnal
@@ -127,6 +128,23 @@ void readCANMessages() {
 
   while (CAN_MSGAVAIL == CAN.checkReceive()) {
     CAN.readMsgBuf(&rxId, &len, rxBuf);
+
+
+    if (rxId == 0x701 || rxId == 0x702) {
+      byte state = rxBuf[0];
+      byte nodeId = rxId - 0x700;
+
+      if (state != 0x05) {
+        Serial.print("[WARN] Node ");
+        Serial.print(nodeId);
+        Serial.print(" not operational, state: 0x");
+        Serial.println(state, HEX);
+
+        // Réenvoi d’une commande NMT Start
+        byte startCmd[] = {0x01, nodeId};
+        CAN.sendMsgBuf(0x000, 0, 2, startCmd);
+      }
+    }
 
     for (int i = 0; i < 2; i++) {
       EncoderData &enc = encoders[i];

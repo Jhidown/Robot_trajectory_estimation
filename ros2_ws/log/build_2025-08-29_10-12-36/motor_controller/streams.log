@@ -1,0 +1,19 @@
+[3.852s] Invoking command in '/home/project/ros2_ws/build/motor_controller': PYTHONPATH=/home/project/ros2_ws/build/motor_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/motor_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/motor_controller/build --no-deps symlink_data --force
+[4.845s] running develop
+[5.215s] running egg_info
+[5.216s] writing motor_controller.egg-info/PKG-INFO
+[5.218s] writing dependency_links to motor_controller.egg-info/dependency_links.txt
+[5.219s] writing entry points to motor_controller.egg-info/entry_points.txt
+[5.219s] writing requirements to motor_controller.egg-info/requires.txt
+[5.220s] writing top-level names to motor_controller.egg-info/top_level.txt
+[5.294s] reading manifest file 'motor_controller.egg-info/SOURCES.txt'
+[5.296s] writing manifest file 'motor_controller.egg-info/SOURCES.txt'
+[5.410s] running build_ext
+[5.417s] Creating /home/project/ros2_ws/install/motor_controller/lib/python3.8/site-packages/motor-controller.egg-link (link to .)
+[5.421s] Installing motor_node script to /home/project/ros2_ws/install/motor_controller/lib/motor_controller
+[5.421s] 
+[5.422s] Installed /home/project/ros2_ws/build/motor_controller
+[5.422s] running symlink_data
+[5.422s] symbolically linking /home/project/ros2_ws/build/motor_controller/resource/motor_controller -> /home/project/ros2_ws/install/motor_controller/share/ament_index/resource_index/packages
+[5.422s] symbolically linking /home/project/ros2_ws/build/motor_controller/package.xml -> /home/project/ros2_ws/install/motor_controller/share/motor_controller
+[6.019s] Invoked command in '/home/project/ros2_ws/build/motor_controller' returned '0': PYTHONPATH=/home/project/ros2_ws/build/motor_controller/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/motor_controller/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/motor_controller/build --no-deps symlink_data --force

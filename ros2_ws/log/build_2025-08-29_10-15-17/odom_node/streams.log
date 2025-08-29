@@ -1,0 +1,17 @@
+[2.327s] Invoking command in '/home/project/ros2_ws/build/odom_node': PYTHONPATH=/home/project/ros2_ws/build/odom_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/odom_node/build --no-deps symlink_data
+[2.905s] running develop
+[3.269s] running egg_info
+[3.271s] writing odom_node.egg-info/PKG-INFO
+[3.271s] writing dependency_links to odom_node.egg-info/dependency_links.txt
+[3.272s] writing entry points to odom_node.egg-info/entry_points.txt
+[3.272s] writing requirements to odom_node.egg-info/requires.txt
+[3.272s] writing top-level names to odom_node.egg-info/top_level.txt
+[3.349s] reading manifest file 'odom_node.egg-info/SOURCES.txt'
+[3.351s] writing manifest file 'odom_node.egg-info/SOURCES.txt'
+[3.447s] running build_ext
+[3.449s] Creating /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom-node.egg-link (link to .)
+[3.453s] Installing odom_node script to /home/project/ros2_ws/install/odom_node/lib/odom_node
+[3.455s] 
+[3.455s] Installed /home/project/ros2_ws/build/odom_node
+[3.455s] running symlink_data
+[3.575s] Invoked command in '/home/project/ros2_ws/build/odom_node' returned '0': PYTHONPATH=/home/project/ros2_ws/build/odom_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/odom_node/build --no-deps symlink_data

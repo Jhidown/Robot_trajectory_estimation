@@ -1,0 +1,10 @@
+Metadata-Version: 1.2
+Name: motor-controller
+Version: 0.0.1
+Summary: ROS2 package for controlling motors via serial communication
+Home-page: UNKNOWN
+Maintainer: project
+Maintainer-email: baptistepnct@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

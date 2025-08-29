@@ -1,16 +1,24 @@
+# ============================================================
+# Author      : Baptiste Poncet
+# Date        : 30/07/2025
+# File        : ekf_filter.py
+# Description : Extended Kalman Filter for fusing camera and wheel odometry data
+# ============================================================
+
 import numpy as np
 from filterpy.kalman import ExtendedKalmanFilter
 from tkinter import filedialog
-import math
+
 
 class EKFFusion:
     def __init__(self):
         self.ekf = ExtendedKalmanFilter(dim_x=3, dim_z=2)
         self.ekf.x = np.array([0., 0., 0.])  # x, y, θ
         self.ekf.P = np.eye(3) * 1.0
-        self.ekf.Q = np.diag([0.01, 0.01, 0.001])
+        self.ekf.Q = np.diag([0.1, 0.1, 0.05])
         self.ekf.R = np.diag([0.01, 0.01])
         self.trajectory = []
+        self.encoder_trajectory = []
 
     def fx(self, x, u, dt):
         v, omega = u
@@ -44,18 +52,15 @@ class EKFFusion:
 
         # Prédiction de l’état par équation non linéaire
         x_pred = self.fx(x, u, dt)
+        x_enc, y_enc = x_pred[0], x_pred[1]
+        self.encoder_trajectory.append((x_enc, y_enc))
 
-        # Jacobienne F(x, u, dt)
+
         F = self.Fx(x, u, dt)
-
-        # Mise à jour de la covariance
         P_pred = F @ P @ F.T + Q
 
-        # Mise à jour de l'état dans le filtre
         self.ekf.x = x_pred
         self.ekf.P = P_pred
-
-        self.trajectory.append((x_pred[0], x_pred[1]))
 
         
     def get_pose(self):
@@ -73,6 +78,7 @@ class EKFFusion:
     def update(self, x_cam, y_cam):
         z = np.array([x_cam, y_cam])
         self.ekf.update(z, HJacobian=self.Hx, Hx=self.hx)
+        self.trajectory.append((self.ekf.x[0], self.ekf.x[1]))
 
     def save_trajectory_to_csv(self, filepath=None):
         if filepath is None:
@@ -83,3 +89,17 @@ class EKFFusion:
             return True
         return False
     
+    def save_encoder_trajectory_to_csv(self, filepath=None):
+        if filepath is None:
+            filepath = filedialog.asksaveasfilename(defaultextension=".csv",
+                                                    filetypes=[("CSV files", "*.csv")])
+        if filepath :
+            np.savetxt(filepath, np.array(self.encoder_trajectory), delimiter=",", header="x,y", comments="")
+            return True
+        return False
+
+    def reset(self):
+        self.ekf.x = np.array([0., 0., 0.])
+        self.ekf.P = np.eye(3) * 1.0
+        self.trajectory.clear()
+        self.encoder_trajectory.clear()

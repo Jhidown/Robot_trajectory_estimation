@@ -1,0 +1,17 @@
+[3.493s] Invoking command in '/home/project/ros2_ws/build/camera_node': PYTHONPATH=/home/project/ros2_ws/build/camera_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/camera_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/camera_node/build --no-deps symlink_data
+[4.317s] running develop
+[4.792s] running egg_info
+[4.792s] writing camera_node.egg-info/PKG-INFO
+[4.792s] writing dependency_links to camera_node.egg-info/dependency_links.txt
+[4.792s] writing entry points to camera_node.egg-info/entry_points.txt
+[4.793s] writing requirements to camera_node.egg-info/requires.txt
+[4.793s] writing top-level names to camera_node.egg-info/top_level.txt
+[4.890s] reading manifest file 'camera_node.egg-info/SOURCES.txt'
+[4.892s] writing manifest file 'camera_node.egg-info/SOURCES.txt'
+[5.004s] running build_ext
+[5.005s] Creating /home/project/ros2_ws/install/camera_node/lib/python3.8/site-packages/camera-node.egg-link (link to .)
+[5.010s] Installing camera_node script to /home/project/ros2_ws/install/camera_node/lib/camera_node
+[5.011s] 
+[5.011s] Installed /home/project/ros2_ws/build/camera_node
+[5.012s] running symlink_data
+[5.596s] Invoked command in '/home/project/ros2_ws/build/camera_node' returned '0': PYTHONPATH=/home/project/ros2_ws/build/camera_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/camera_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/camera_node/build --no-deps symlink_data

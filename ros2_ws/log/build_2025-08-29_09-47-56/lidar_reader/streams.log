@@ -1,0 +1,21 @@
+[3.206s] Invoking command in '/home/project/ros2_ws/build/lidar_reader': PYTHONPATH=/home/project/ros2_ws/build/lidar_reader/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/lidar_reader/build --no-deps symlink_data --force
+[3.942s] running develop
+[4.306s] running egg_info
+[4.307s] writing lidar_reader.egg-info/PKG-INFO
+[4.308s] writing dependency_links to lidar_reader.egg-info/dependency_links.txt
+[4.309s] writing entry points to lidar_reader.egg-info/entry_points.txt
+[4.310s] writing requirements to lidar_reader.egg-info/requires.txt
+[4.311s] writing top-level names to lidar_reader.egg-info/top_level.txt
+[4.388s] reading manifest file 'lidar_reader.egg-info/SOURCES.txt'
+[4.390s] writing manifest file 'lidar_reader.egg-info/SOURCES.txt'
+[4.558s] running build_ext
+[4.559s] Creating /home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/site.py
+[4.559s] Creating /home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/lidar-reader.egg-link (link to .)
+[4.561s] Installing filtered_lidar script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+[4.561s] Installing lidar_node script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+[4.562s] 
+[4.562s] Installed /home/project/ros2_ws/build/lidar_reader
+[4.563s] running symlink_data
+[4.563s] symbolically linking /home/project/ros2_ws/build/lidar_reader/resource/lidar_reader -> /home/project/ros2_ws/install/lidar_reader/share/ament_index/resource_index/packages
+[4.563s] symbolically linking /home/project/ros2_ws/build/lidar_reader/package.xml -> /home/project/ros2_ws/install/lidar_reader/share/lidar_reader
+[4.696s] Invoked command in '/home/project/ros2_ws/build/lidar_reader' returned '0': PYTHONPATH=/home/project/ros2_ws/build/lidar_reader/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/lidar_reader/build --no-deps symlink_data --force

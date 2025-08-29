@@ -14,11 +14,11 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), r'C:\Use
 from .camera_window import open_camera_window
 from .styles import toggle_dark_mode
 from communication.serial_comm import start_connection, send_custom_message, close_connection
-from logic.trajectory import update_trajectory
 from communication.flask_server import start_flask_server, register_command_handler, register_log_handler
 from logic.vision_utils import VisualOdometry
 from logic.ekf_filter import EKFFusion
 import tkinter as tk
+import numpy as np
 from tkinter import ttk
 from tkinter import filedialog
 import serial
@@ -76,7 +76,7 @@ def run_gui():
 
     # ===== Creation of main window 'root' =====
     root = tk.Tk()
-    root.title("Interface Projet")
+    root.title("Main Window")
 
     # ===== Grid =====
     root.grid_rowconfigure(0, weight=0)  # port_frame
@@ -94,9 +94,13 @@ def run_gui():
     delta_theta_total = 0.0
     dt_accumulated = 0.0
     last_update_time = [time.time()]
+    encoder_trajectory = []
+    last_valid_position = None
+    encoder_pose = [0.0, 0.0, 0.0]
 
     def insert_custom_message(message: str, tag: str):
-        nonlocal delta_d_total, delta_theta_total, dt_accumulated
+        nonlocal delta_d_total, delta_theta_total, dt_accumulated,last_valid_position, encoder_trajectory
+        nonlocal encoder_pose
 
         timestamp = datetime.now().strftime("%H:%M:%S")
         full_msg = f"[{timestamp}] {message}"
@@ -120,23 +124,34 @@ def run_gui():
         match_vo = re.search(r"[DIST]", message)
         if match_vo :
             vo.trigger_capture()
-            x_cam, y_cam = vo.get_position()
-            
-            if dt_accumulated > 0:
-                ekf.predict(delta_d_total, delta_theta_total, dt_accumulated)
-                delta_d_total = 0
-                delta_theta_total = 0
-                dt_accumulated = 0
 
-            if x_cam is not None and y_cam is not None:
+        x_cam, y_cam = vo.get_position()
+        if x_cam is not None and y_cam is not None:
+            new_position = (x_cam, y_cam)
+            if new_position != last_valid_position:
+                last_valid_position = new_position   
+                if dt_accumulated > 0:
+                    ekf.predict(delta_d_total, delta_theta_total, dt_accumulated)
+
+                    v = delta_d_total / dt_accumulated
+                    omega = delta_theta_total / dt_accumulated
+                    theta = encoder_pose[2]
+
+                    dx = v * np.cos(theta) * dt_accumulated
+                    dy = v * np.sin(theta) * dt_accumulated
+                    dtheta = omega * dt_accumulated
+
+                    encoder_pose[0] += dx
+                    encoder_pose[1] += dy
+                    encoder_pose[2] += dtheta
+
+                    encoder_trajectory.append((encoder_pose[0], encoder_pose[1]))
+
+                    delta_d_total = 0
+                    delta_theta_total = 0
+                    dt_accumulated = 0
+
                 ekf.update(x_cam, y_cam)
-        
-        
-
-            
-
-
-
 
     def connect_serial():
         port = port_var.get()
@@ -179,7 +194,7 @@ def run_gui():
             output_label.config(text=text, fg=color)
 
         send_custom_message(message, update_status)
-        update_trajectory(left, right)
+        #update_trajectory(left, right)
         insert_custom_message(f"[PC ➜ LoRa] {message}","sent")
         
 
@@ -347,7 +362,7 @@ def run_gui():
     dark_button = tk.Button(top_right_button_frame, text="Night mode",width=15, command=toggle_theme)
     dark_button.grid(row=0, column=0, padx=5, pady=5)
 
-    open_camera_button = tk.Button(top_right_button_frame,text='Open camera',width=15,command=lambda: open_camera_window(root,vo,ekf))
+    open_camera_button = tk.Button(top_right_button_frame,text='Open camera',width=15,command=lambda: open_camera_window(root,ekf))
     open_camera_button.grid(row=0,column=1,padx=5,pady=5)
 
     send_entry = tk.Entry(send_frame, width=50)

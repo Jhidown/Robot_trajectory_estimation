@@ -12,7 +12,7 @@ import time
 from tkinter import filedialog
 
 # ===== Camera Parameters =====
-CAMERA_INDEX = 1      # 0 for default camera, 1 for USB camera
+CAMERA_INDEX = 0     # 0 for default camera, 1 for USB camera
 FOCAL_MATRIX = np.array([[825.7095, 0, 416.1148],
                          [0, 837.0046, 490.3529],
                          [0, 0, 1]])

@@ -1,0 +1,20 @@
+[2.204s] Invoking command in '/home/project/ros2_ws/build/vo_node': PYTHONPATH=/home/project/ros2_ws/build/vo_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/vo_node/build --no-deps symlink_data --force
+[2.796s] running develop
+[3.102s] running egg_info
+[3.103s] writing vo_node.egg-info/PKG-INFO
+[3.103s] writing dependency_links to vo_node.egg-info/dependency_links.txt
+[3.104s] writing entry points to vo_node.egg-info/entry_points.txt
+[3.104s] writing requirements to vo_node.egg-info/requires.txt
+[3.105s] writing top-level names to vo_node.egg-info/top_level.txt
+[3.170s] reading manifest file 'vo_node.egg-info/SOURCES.txt'
+[3.171s] writing manifest file 'vo_node.egg-info/SOURCES.txt'
+[3.252s] running build_ext
+[3.252s] Creating /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/site.py
+[3.257s] Creating /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo-node.egg-link (link to .)
+[3.259s] Installing vo_node script to /home/project/ros2_ws/install/vo_node/lib/vo_node
+[3.260s] 
+[3.260s] Installed /home/project/ros2_ws/build/vo_node
+[3.260s] running symlink_data
+[3.260s] symbolically linking /home/project/ros2_ws/build/vo_node/resource/vo_node -> /home/project/ros2_ws/install/vo_node/share/ament_index/resource_index/packages
+[3.261s] symbolically linking /home/project/ros2_ws/build/vo_node/package.xml -> /home/project/ros2_ws/install/vo_node/share/vo_node
+[3.351s] Invoked command in '/home/project/ros2_ws/build/vo_node' returned '0': PYTHONPATH=/home/project/ros2_ws/build/vo_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --editable --build-directory /home/project/ros2_ws/build/vo_node/build --no-deps symlink_data --force

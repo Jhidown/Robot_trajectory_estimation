@@ -1,0 +1,18 @@
+running develop
+running egg_info
+writing camera_node.egg-info/PKG-INFO
+writing dependency_links to camera_node.egg-info/dependency_links.txt
+writing entry points to camera_node.egg-info/entry_points.txt
+writing requirements to camera_node.egg-info/requires.txt
+writing top-level names to camera_node.egg-info/top_level.txt
+reading manifest file 'camera_node.egg-info/SOURCES.txt'
+writing manifest file 'camera_node.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/project/ros2_ws/install/camera_node/lib/python3.8/site-packages/site.py
+Creating /home/project/ros2_ws/install/camera_node/lib/python3.8/site-packages/camera-node.egg-link (link to .)
+Installing camera_node script to /home/project/ros2_ws/install/camera_node/lib/camera_node
+
+Installed /home/project/ros2_ws/build/camera_node
+running symlink_data
+symbolically linking /home/project/ros2_ws/build/camera_node/resource/camera_node -> /home/project/ros2_ws/install/camera_node/share/ament_index/resource_index/packages
+symbolically linking /home/project/ros2_ws/build/camera_node/package.xml -> /home/project/ros2_ws/install/camera_node/share/camera_node

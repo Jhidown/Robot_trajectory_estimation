@@ -1,0 +1,22 @@
+[3.443s] Invoking command in '/home/project/ros2_ws/src/lidar_reader': PYTHONPATH=/home/project/ros2_ws/build/lidar_reader/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/lidar_reader build --build-base /home/project/ros2_ws/build/lidar_reader/build install --record /home/project/ros2_ws/build/lidar_reader/install.log --install-scripts $base/lib/lidar_reader --single-version-externally-managed install_data
+[4.051s] running egg_info
+[4.054s] writing ../../build/lidar_reader/lidar_reader.egg-info/PKG-INFO
+[4.055s] writing dependency_links to ../../build/lidar_reader/lidar_reader.egg-info/dependency_links.txt
+[4.056s] writing entry points to ../../build/lidar_reader/lidar_reader.egg-info/entry_points.txt
+[4.057s] writing requirements to ../../build/lidar_reader/lidar_reader.egg-info/requires.txt
+[4.058s] writing top-level names to ../../build/lidar_reader/lidar_reader.egg-info/top_level.txt
+[4.137s] reading manifest file '../../build/lidar_reader/lidar_reader.egg-info/SOURCES.txt'
+[4.139s] writing manifest file '../../build/lidar_reader/lidar_reader.egg-info/SOURCES.txt'
+[4.140s] running build
+[4.141s] running build_py
+[4.141s] running install
+[4.144s] running install_lib
+[4.149s] running install_data
+[4.150s] running install_egg_info
+[4.159s] removing '/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/lidar_reader-0.0.0-py3.8.egg-info' (and everything under it)
+[4.161s] Copying ../../build/lidar_reader/lidar_reader.egg-info to /home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages/lidar_reader-0.0.0-py3.8.egg-info
+[4.163s] running install_scripts
+[4.209s] Installing filtered_lidar script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+[4.209s] Installing lidar_node script to /home/project/ros2_ws/install/lidar_reader/lib/lidar_reader
+[4.210s] writing list of installed files to '/home/project/ros2_ws/build/lidar_reader/install.log'
+[4.869s] Invoked command in '/home/project/ros2_ws/src/lidar_reader' returned '0': PYTHONPATH=/home/project/ros2_ws/build/lidar_reader/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/lidar_reader/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/lidar_reader build --build-base /home/project/ros2_ws/build/lidar_reader/build install --record /home/project/ros2_ws/build/lidar_reader/install.log --install-scripts $base/lib/lidar_reader --single-version-externally-managed install_data

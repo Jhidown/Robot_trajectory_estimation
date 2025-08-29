@@ -1,0 +1,31 @@
+[2.288s] Invoking command in '/home/project/ros2_ws/build/vo_node': PYTHONPATH=/home/project/ros2_ws/build/vo_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/project/ros2_ws/build/vo_node/build
+[2.864s] running develop
+[3.195s] Removing /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo-node.egg-link (link to .)
+[3.260s] Invoked command in '/home/project/ros2_ws/build/vo_node' returned '0': PYTHONPATH=/home/project/ros2_ws/build/vo_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/project/ros2_ws/build/vo_node/build
+[3.267s] Invoking command in '/home/project/ros2_ws/src/vo_node': PYTHONPATH=/home/project/ros2_ws/build/vo_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/vo_node build --build-base /home/project/ros2_ws/build/vo_node/build install --record /home/project/ros2_ws/build/vo_node/install.log --install-scripts $base/lib/vo_node --single-version-externally-managed install_data --force
+[3.786s] running egg_info
+[3.787s] writing ../../build/vo_node/vo_node.egg-info/PKG-INFO
+[3.788s] writing dependency_links to ../../build/vo_node/vo_node.egg-info/dependency_links.txt
+[3.788s] writing entry points to ../../build/vo_node/vo_node.egg-info/entry_points.txt
+[3.789s] writing requirements to ../../build/vo_node/vo_node.egg-info/requires.txt
+[3.789s] writing top-level names to ../../build/vo_node/vo_node.egg-info/top_level.txt
+[3.859s] reading manifest file '../../build/vo_node/vo_node.egg-info/SOURCES.txt'
+[3.860s] writing manifest file '../../build/vo_node/vo_node.egg-info/SOURCES.txt'
+[3.860s] running build
+[3.861s] running build_py
+[3.861s] running install
+[3.863s] running install_lib
+[3.865s] creating /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo_node
+[3.865s] copying /home/project/ros2_ws/build/vo_node/build/lib/vo_node/__init__.py -> /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo_node
+[3.866s] copying /home/project/ros2_ws/build/vo_node/build/lib/vo_node/vo_node.py -> /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo_node
+[3.867s] byte-compiling /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo_node/__init__.py to __init__.cpython-38.pyc
+[3.869s] byte-compiling /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo_node/vo_node.py to vo_node.cpython-38.pyc
+[3.872s] running install_data
+[3.873s] copying resource/vo_node -> /home/project/ros2_ws/install/vo_node/share/ament_index/resource_index/packages
+[3.873s] copying package.xml -> /home/project/ros2_ws/install/vo_node/share/vo_node
+[3.873s] running install_egg_info
+[3.877s] Copying ../../build/vo_node/vo_node.egg-info to /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo_node-0.0.0-py3.8.egg-info
+[3.879s] running install_scripts
+[3.919s] Installing vo_node script to /home/project/ros2_ws/install/vo_node/lib/vo_node
+[3.920s] writing list of installed files to '/home/project/ros2_ws/build/vo_node/install.log'
+[3.988s] Invoked command in '/home/project/ros2_ws/src/vo_node' returned '0': PYTHONPATH=/home/project/ros2_ws/build/vo_node/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/vo_node build --build-base /home/project/ros2_ws/build/vo_node/build install --record /home/project/ros2_ws/build/vo_node/install.log --install-scripts $base/lib/vo_node --single-version-externally-managed install_data --force

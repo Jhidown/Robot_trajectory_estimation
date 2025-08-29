@@ -1,0 +1,31 @@
+[3.275s] Invoking command in '/home/project/ros2_ws/build/can_bridge': PYTHONPATH=/home/project/ros2_ws/build/can_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/project/ros2_ws/build/can_bridge/build
+[3.850s] running develop
+[4.195s] Removing /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can-bridge.egg-link (link to .)
+[4.289s] Invoked command in '/home/project/ros2_ws/build/can_bridge' returned '0': PYTHONPATH=/home/project/ros2_ws/build/can_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/project/ros2_ws/build/can_bridge/build
+[4.291s] Invoking command in '/home/project/ros2_ws/src/can_bridge': PYTHONPATH=/home/project/ros2_ws/build/can_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/can_bridge build --build-base /home/project/ros2_ws/build/can_bridge/build install --record /home/project/ros2_ws/build/can_bridge/install.log --install-scripts $base/lib/can_bridge --single-version-externally-managed install_data --force
+[4.791s] running egg_info
+[4.793s] writing ../../build/can_bridge/can_bridge.egg-info/PKG-INFO
+[4.795s] writing dependency_links to ../../build/can_bridge/can_bridge.egg-info/dependency_links.txt
+[4.796s] writing entry points to ../../build/can_bridge/can_bridge.egg-info/entry_points.txt
+[4.797s] writing requirements to ../../build/can_bridge/can_bridge.egg-info/requires.txt
+[4.798s] writing top-level names to ../../build/can_bridge/can_bridge.egg-info/top_level.txt
+[4.872s] reading manifest file '../../build/can_bridge/can_bridge.egg-info/SOURCES.txt'
+[4.875s] writing manifest file '../../build/can_bridge/can_bridge.egg-info/SOURCES.txt'
+[4.875s] running build
+[4.875s] running build_py
+[4.876s] running install
+[4.878s] running install_lib
+[4.881s] creating /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can_bridge
+[4.881s] copying /home/project/ros2_ws/build/can_bridge/build/lib/can_bridge/__init__.py -> /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can_bridge
+[4.882s] copying /home/project/ros2_ws/build/can_bridge/build/lib/can_bridge/can_bridge_node.py -> /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can_bridge
+[4.883s] byte-compiling /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can_bridge/__init__.py to __init__.cpython-38.pyc
+[4.886s] byte-compiling /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can_bridge/can_bridge_node.py to can_bridge_node.cpython-38.pyc
+[4.888s] running install_data
+[4.889s] copying resource/can_bridge -> /home/project/ros2_ws/install/can_bridge/share/ament_index/resource_index/packages
+[4.890s] copying package.xml -> /home/project/ros2_ws/install/can_bridge/share/can_bridge
+[4.890s] running install_egg_info
+[4.895s] Copying ../../build/can_bridge/can_bridge.egg-info to /home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages/can_bridge-0.0.0-py3.8.egg-info
+[4.897s] running install_scripts
+[4.943s] Installing can_bridge script to /home/project/ros2_ws/install/can_bridge/lib/can_bridge
+[4.945s] writing list of installed files to '/home/project/ros2_ws/build/can_bridge/install.log'
+[5.062s] Invoked command in '/home/project/ros2_ws/src/can_bridge' returned '0': PYTHONPATH=/home/project/ros2_ws/build/can_bridge/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/can_bridge/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/can_bridge build --build-base /home/project/ros2_ws/build/can_bridge/build install --record /home/project/ros2_ws/build/can_bridge/install.log --install-scripts $base/lib/can_bridge --single-version-externally-managed install_data --force

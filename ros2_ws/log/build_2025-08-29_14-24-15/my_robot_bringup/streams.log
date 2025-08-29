@@ -1,0 +1,31 @@
+[2.661s] Invoking command in '/home/project/ros2_ws/build/my_robot_bringup': PYTHONPATH=/home/project/ros2_ws/build/my_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/project/ros2_ws/build/my_robot_bringup/build
+[3.183s] running develop
+[3.498s] Removing /home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages/my-robot-bringup.egg-link (link to .)
+[3.579s] Invoked command in '/home/project/ros2_ws/build/my_robot_bringup' returned '0': PYTHONPATH=/home/project/ros2_ws/build/my_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py develop --uninstall --editable --build-directory /home/project/ros2_ws/build/my_robot_bringup/build
+[3.581s] Invoking command in '/home/project/ros2_ws/src/my_robot_bringup': PYTHONPATH=/home/project/ros2_ws/build/my_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_bringup build --build-base /home/project/ros2_ws/build/my_robot_bringup/build install --record /home/project/ros2_ws/build/my_robot_bringup/install.log --install-scripts $base/lib/my_robot_bringup --single-version-externally-managed install_data --force
+[4.097s] running egg_info
+[4.098s] writing ../../build/my_robot_bringup/my_robot_bringup.egg-info/PKG-INFO
+[4.099s] writing dependency_links to ../../build/my_robot_bringup/my_robot_bringup.egg-info/dependency_links.txt
+[4.100s] writing entry points to ../../build/my_robot_bringup/my_robot_bringup.egg-info/entry_points.txt
+[4.100s] writing requirements to ../../build/my_robot_bringup/my_robot_bringup.egg-info/requires.txt
+[4.100s] writing top-level names to ../../build/my_robot_bringup/my_robot_bringup.egg-info/top_level.txt
+[4.173s] reading manifest file '../../build/my_robot_bringup/my_robot_bringup.egg-info/SOURCES.txt'
+[4.176s] writing manifest file '../../build/my_robot_bringup/my_robot_bringup.egg-info/SOURCES.txt'
+[4.176s] running build
+[4.176s] running build_py
+[4.177s] running install
+[4.179s] running install_lib
+[4.181s] creating /home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages/my_robot_bringup
+[4.181s] copying /home/project/ros2_ws/build/my_robot_bringup/build/lib/my_robot_bringup/__init__.py -> /home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages/my_robot_bringup
+[4.182s] byte-compiling /home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages/my_robot_bringup/__init__.py to __init__.cpython-38.pyc
+[4.185s] running install_data
+[4.185s] copying resource/my_robot_bringup -> /home/project/ros2_ws/install/my_robot_bringup/share/ament_index/resource_index/packages
+[4.186s] copying package.xml -> /home/project/ros2_ws/install/my_robot_bringup/share/my_robot_bringup
+[4.186s] copying launch/bringup_launch.py -> /home/project/ros2_ws/install/my_robot_bringup/share/my_robot_bringup/launch
+[4.187s] copying launch/ekf_launch.py -> /home/project/ros2_ws/install/my_robot_bringup/share/my_robot_bringup/launch
+[4.188s] copying config/ekf.yaml -> /home/project/ros2_ws/install/my_robot_bringup/share/my_robot_bringup/config
+[4.188s] running install_egg_info
+[4.193s] Copying ../../build/my_robot_bringup/my_robot_bringup.egg-info to /home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages/my_robot_bringup-0.0.0-py3.8.egg-info
+[4.195s] running install_scripts
+[4.237s] writing list of installed files to '/home/project/ros2_ws/build/my_robot_bringup/install.log'
+[4.324s] Invoked command in '/home/project/ros2_ws/src/my_robot_bringup' returned '0': PYTHONPATH=/home/project/ros2_ws/build/my_robot_bringup/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/project/ros2_ws/install/my_robot_bringup/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/my_robot_bringup build --build-base /home/project/ros2_ws/build/my_robot_bringup/build install --record /home/project/ros2_ws/build/my_robot_bringup/install.log --install-scripts $base/lib/my_robot_bringup --single-version-externally-managed install_data --force

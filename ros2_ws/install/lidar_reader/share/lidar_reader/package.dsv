@@ -1,0 +1,6 @@
+source;share/lidar_reader/hook/pythonpath.ps1
+source;share/lidar_reader/hook/pythonpath.dsv
+source;share/lidar_reader/hook/pythonpath.sh
+source;share/lidar_reader/hook/ament_prefix_path.ps1
+source;share/lidar_reader/hook/ament_prefix_path.dsv
+source;share/lidar_reader/hook/ament_prefix_path.sh

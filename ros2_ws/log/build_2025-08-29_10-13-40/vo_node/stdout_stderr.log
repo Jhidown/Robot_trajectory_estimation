@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing vo_node.egg-info/PKG-INFO
+writing dependency_links to vo_node.egg-info/dependency_links.txt
+writing entry points to vo_node.egg-info/entry_points.txt
+writing requirements to vo_node.egg-info/requires.txt
+writing top-level names to vo_node.egg-info/top_level.txt
+reading manifest file 'vo_node.egg-info/SOURCES.txt'
+writing manifest file 'vo_node.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/project/ros2_ws/install/vo_node/lib/python3.8/site-packages/vo-node.egg-link (link to .)
+Installing vo_node script to /home/project/ros2_ws/install/vo_node/lib/vo_node
+
+Installed /home/project/ros2_ws/build/vo_node
+running symlink_data

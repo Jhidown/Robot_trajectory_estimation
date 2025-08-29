@@ -1,0 +1,35 @@
+running egg_info
+creating ../../build/odom_node/odom_node.egg-info
+writing ../../build/odom_node/odom_node.egg-info/PKG-INFO
+writing dependency_links to ../../build/odom_node/odom_node.egg-info/dependency_links.txt
+writing entry points to ../../build/odom_node/odom_node.egg-info/entry_points.txt
+writing requirements to ../../build/odom_node/odom_node.egg-info/requires.txt
+writing top-level names to ../../build/odom_node/odom_node.egg-info/top_level.txt
+writing manifest file '../../build/odom_node/odom_node.egg-info/SOURCES.txt'
+reading manifest file '../../build/odom_node/odom_node.egg-info/SOURCES.txt'
+writing manifest file '../../build/odom_node/odom_node.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/project/ros2_ws/build/odom_node/build
+creating /home/project/ros2_ws/build/odom_node/build/lib
+creating /home/project/ros2_ws/build/odom_node/build/lib/odom_node
+copying odom_node/__init__.py -> /home/project/ros2_ws/build/odom_node/build/lib/odom_node
+copying odom_node/odom_node.py -> /home/project/ros2_ws/build/odom_node/build/lib/odom_node
+running install
+running install_lib
+creating /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom_node
+copying /home/project/ros2_ws/build/odom_node/build/lib/odom_node/__init__.py -> /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom_node
+copying /home/project/ros2_ws/build/odom_node/build/lib/odom_node/odom_node.py -> /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom_node
+byte-compiling /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom_node/__init__.py to __init__.cpython-38.pyc
+byte-compiling /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom_node/odom_node.py to odom_node.cpython-38.pyc
+running install_data
+creating /home/project/ros2_ws/install/odom_node/share/ament_index
+creating /home/project/ros2_ws/install/odom_node/share/ament_index/resource_index
+creating /home/project/ros2_ws/install/odom_node/share/ament_index/resource_index/packages
+copying resource/odom_node -> /home/project/ros2_ws/install/odom_node/share/ament_index/resource_index/packages
+copying package.xml -> /home/project/ros2_ws/install/odom_node/share/odom_node
+running install_egg_info
+Copying ../../build/odom_node/odom_node.egg-info to /home/project/ros2_ws/install/odom_node/lib/python3.8/site-packages/odom_node-0.0.1-py3.8.egg-info
+running install_scripts
+Installing odom_node script to /home/project/ros2_ws/install/odom_node/lib/odom_node
+writing list of installed files to '/home/project/ros2_ws/build/odom_node/install.log'
